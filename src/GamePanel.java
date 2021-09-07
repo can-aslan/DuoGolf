@@ -15,10 +15,11 @@ public class GamePanel extends JPanel
 {
     
     // Properties
-    final int WIDTH;
-    final int HEIGHT;
-    final Color LIME;
-    Hole hole;
+    private final int WIDTH;
+    private final int HEIGHT;
+    private final Color LIME;
+    private Hole hole;
+    private GolfBall golfBall;
 
     // Constructors
     public GamePanel( int width, int height) {
@@ -34,6 +35,9 @@ public class GamePanel extends JPanel
         hole = new Hole( WIDTH, HEIGHT);
         add( hole);
 
+        golfBall = new GolfBall( WIDTH, HEIGHT, hole);
+        add( golfBall);
+
         repaint();
     }
     
@@ -43,5 +47,6 @@ public class GamePanel extends JPanel
         super.paintComponent( g);
 
         hole.paintComponent( g);
+        golfBall.paintComponent( g);
     }
 }
