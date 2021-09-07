@@ -16,9 +16,11 @@ public class Hole extends JComponent
 {
     // Properties
     private final Color COLOR = new Color( 50, 50, 50); // Dark Gray
-    private final int BORDER_SIZE = 2;
+    private final Color BORDER_COLOR = new Color( 100, 100, 100); // Lighter Dark Gray
+    private final int BORDER_SIZE = 1;
     private final int PROG_WIDTH;
     private final int PROG_HEIGHT;
+    private final int SIZE_OF_BORDER_AND_GOLF_BALL;
     private boolean playerScored;
     public final int SIZE = 30;
     public int x;
@@ -29,11 +31,18 @@ public class Hole extends JComponent
         PROG_WIDTH = width;
         PROG_HEIGHT = height;
         
-        x = (int) (Math.random() * ((PROG_WIDTH - 2*SIZE) / 2));
-        y = (int) (Math.random() * ((PROG_HEIGHT - 2*SIZE) / 2));
-        
+        do {
+            x = (int) (Math.random() * ((PROG_WIDTH - 2*SIZE) / 2));
+        } while ( x < (2*SIZE) || x > (PROG_WIDTH - (2*SIZE)));
+
+        do {
+            y = (int) (Math.random() * ((PROG_HEIGHT - 2*SIZE) / 2));
+        } while ( y < (2*SIZE) || y > (PROG_HEIGHT - (2*SIZE)));
+
         playerScored = false;
         
+        SIZE_OF_BORDER_AND_GOLF_BALL = SIZE + 2*BORDER_SIZE;
+
         repaint();
     }
     
@@ -47,6 +56,8 @@ public class Hole extends JComponent
         graphics2D.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // TODO Hole Border
+        graphics2D.setColor( BORDER_COLOR);
+        graphics2D.fillOval( x - BORDER_SIZE, y - BORDER_SIZE, SIZE_OF_BORDER_AND_GOLF_BALL, SIZE_OF_BORDER_AND_GOLF_BALL);
 
         // Hole
         graphics2D.setColor( COLOR);

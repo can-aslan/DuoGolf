@@ -3,9 +3,14 @@ package gameobjects;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.MouseInfo;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
+import javax.swing.event.MouseInputListener;
 
 /**
  * Hole Class
@@ -21,6 +26,10 @@ public class GolfBall extends JComponent
     private final int PROG_WIDTH;
     private final int PROG_HEIGHT;
     private final int SIZE_OF_BORDER_AND_GOLF_BALL;
+    private CustomMouseListener listener;
+    private Point initialDragPoint;
+    private Point lastDragPoint;
+    private int speed;
     public final int SIZE = 20;
 
     private Hole hole;
@@ -29,6 +38,9 @@ public class GolfBall extends JComponent
     
     // Constructors
     public GolfBall( int width, int height, Hole hole) {
+        speed = 0;
+        listener = new CustomMouseListener();
+
         PROG_WIDTH = width;
         PROG_HEIGHT = height;
         
@@ -38,6 +50,8 @@ public class GolfBall extends JComponent
         y = PROG_HEIGHT - hole.y;
         
         SIZE_OF_BORDER_AND_GOLF_BALL = SIZE + 2*BORDER_SIZE;
+
+        addMouseListener( listener);
 
         repaint();
     }
@@ -58,5 +72,51 @@ public class GolfBall extends JComponent
         // Golf Ball
         graphics2D.setColor( COLOR);
         graphics2D.fillOval( x, y, SIZE, SIZE);
+    }
+
+    
+
+    private int calculateSpeed( Point init, Point last) {
+        int newSpeed = 0;
+        
+        newSpeed = (int) Math.sqrt( Math.pow( Math.abs( init.getX() - last.getX()), 2) + Math.pow( Math.abs( init.getY() - last.getY()), 2));
+
+        speed = newSpeed;
+        return speed;
+    }
+
+    private class CustomMouseListener implements MouseListener {
+
+        private CustomMouseListener() {
+            System.out.println( "CustomMouseListener initialized.");
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            System.out.println( "clicked");
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            System.out.println( "pressed");
+            initialDragPoint = MouseInfo.getPointerInfo().getLocation();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            System.out.println( "released");
+            lastDragPoint = MouseInfo.getPointerInfo().getLocation();
+            System.out.println( "Speed: " + calculateSpeed( initialDragPoint, lastDragPoint));
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            System.out.println( "entered");
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            System.out.println( "exited");
+        }
     }
 }

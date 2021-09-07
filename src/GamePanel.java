@@ -1,8 +1,11 @@
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.BorderFactory;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import gameobjects.*;
 
@@ -11,13 +14,14 @@ import gameobjects.*;
  * @author Yağız Can Aslan
  * @version 07.09.2021
 */
-public class GamePanel extends JPanel
+public class GamePanel extends JPanel implements ActionListener
 {
     
     // Properties
     private final int WIDTH;
     private final int HEIGHT;
     private final Color LIME;
+    private Timer timer;
     private Hole hole;
     private GolfBall golfBall;
 
@@ -25,7 +29,7 @@ public class GamePanel extends JPanel
     public GamePanel( int width, int height) {
         WIDTH = width;
         HEIGHT = height;  
-        LIME = new Color( 145, 230, 121);  
+        LIME = new Color( 145, 230, 121);
 
         setBackground( LIME);
 
@@ -39,6 +43,9 @@ public class GamePanel extends JPanel
         add( golfBall);
 
         repaint();
+
+        timer = new Timer( 10, this);
+        timer.start();
     }
     
     // Methods
@@ -48,5 +55,13 @@ public class GamePanel extends JPanel
 
         hole.paintComponent( g);
         golfBall.paintComponent( g);
+
+        timer.start();
+    }
+
+    @Override
+    public void actionPerformed( ActionEvent e) {
+        timer.stop();
+        repaint();
     }
 }
