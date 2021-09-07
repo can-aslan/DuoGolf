@@ -17,11 +17,11 @@ public class GolfBall extends JComponent
     // Properties
     private final Color BORDER_COLOR = new Color( 10, 10, 10); // Dark Gray
     private final Color COLOR = new Color( 210, 211, 212); // White
-    private final int BORDER_SIZE = 3;
+    private final int BORDER_SIZE = 2;
     private final int PROG_WIDTH;
     private final int PROG_HEIGHT;
     private final int SIZE_OF_BORDER_AND_GOLF_BALL;
-    public final int SIZE = 30;
+    public final int SIZE = 20;
 
     private Hole hole;
     public int x;
@@ -37,7 +37,7 @@ public class GolfBall extends JComponent
         x = PROG_WIDTH - hole.x;
         y = PROG_HEIGHT - hole.y;
         
-        SIZE_OF_BORDER_AND_GOLF_BALL = SIZE + BORDER_SIZE;
+        SIZE_OF_BORDER_AND_GOLF_BALL = SIZE + 2*BORDER_SIZE;
 
         repaint();
     }
