@@ -50,13 +50,13 @@ public class GolfBall extends JComponent
 
         // Anti-Aliasing
         graphics2D.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
+        
         // Golf Ball Border
         graphics2D.setColor( BORDER_COLOR);
         graphics2D.fillOval( x - BORDER_SIZE, y - BORDER_SIZE, SIZE_OF_BORDER_AND_GOLF_BALL, SIZE_OF_BORDER_AND_GOLF_BALL);
 
         // Golf Ball
         graphics2D.setColor( COLOR);
-        graphics2D.fillOval( x, y, SIZE, SIZE);        
+        graphics2D.fillOval( x, y, SIZE, SIZE);
     }
 }

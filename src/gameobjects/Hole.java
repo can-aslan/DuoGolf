@@ -29,8 +29,8 @@ public class Hole extends JComponent
         PROG_WIDTH = width;
         PROG_HEIGHT = height;
         
-        x = (int) (Math.random() * PROG_WIDTH / 2);
-        y = (int) (Math.random() * PROG_HEIGHT / 2);
+        x = (int) (Math.random() * ((PROG_WIDTH - 2*SIZE) / 2));
+        y = (int) (Math.random() * ((PROG_HEIGHT - 2*SIZE) / 2));
         
         playerScored = false;
         
