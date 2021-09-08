@@ -55,7 +55,7 @@ public class Hole extends JComponent
         // Anti-Aliasing
         graphics2D.setRenderingHint( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // TODO Hole Border
+        // Hole Border
         graphics2D.setColor( BORDER_COLOR);
         graphics2D.fillOval( x - BORDER_SIZE, y - BORDER_SIZE, SIZE_OF_BORDER_AND_GOLF_BALL, SIZE_OF_BORDER_AND_GOLF_BALL);
 

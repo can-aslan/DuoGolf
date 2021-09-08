@@ -34,7 +34,7 @@ public class Main
         
         frame.setTitle( PROG_NAME);
         frame.setPreferredSize( new Dimension( WIDTH, HEIGHT));
-        frame.setResizable( false);
+        frame.setResizable( true);
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE);
         
         frame.pack();
@@ -72,10 +72,15 @@ public class Main
         public void mouseReleased(MouseEvent e) {
             lastDragPoint = MouseInfo.getPointerInfo().getLocation();
 
-            System.out.println( "Speed: " + calculateSpeed( initialDragPoint, lastDragPoint));
-            System.out.println( "Direction: " + calculateDirection( initialDragPoint, lastDragPoint));
+            int speed = calculateSpeed( initialDragPoint, lastDragPoint);
+            int direction = calculateDirection( initialDragPoint, lastDragPoint);
+
+            System.out.println( "Speed: " + speed);
+            System.out.println( "Direction: " + direction);
 
             // panel.getGolfBall().move( 120, 120);
+            panel.getGolfBall().setSpeed( speed);
+            panel.getGolfBall().setDirection( direction);
         }
     
         private int calculateSpeed( Point init, Point last) {
