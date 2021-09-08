@@ -53,32 +53,25 @@ public class Main
         }
     
         @Override
-        public void mouseClicked(MouseEvent e) {
-            System.out.println( "clicked");
-        }
-    
+        public void mouseClicked(MouseEvent e) {}
+
+        @Override
+        public void mouseEntered(MouseEvent e) {}
+
+        @Override
+        public void mouseExited(MouseEvent e) {}
+
         @Override
         public void mousePressed(MouseEvent e) {
-            System.out.println( "pressed");
             initialDragPoint = MouseInfo.getPointerInfo().getLocation();
         }
     
         @Override
         public void mouseReleased(MouseEvent e) {
-            System.out.println( "released");
             lastDragPoint = MouseInfo.getPointerInfo().getLocation();
+
             System.out.println( "Speed: " + calculateSpeed( initialDragPoint, lastDragPoint));
             System.out.println( "Direction: " + calculateDirection( initialDragPoint, lastDragPoint));
-        }
-    
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            System.out.println( "entered");
-        }
-    
-        @Override
-        public void mouseExited(MouseEvent e) {
-            System.out.println( "exited");
         }
     
         private int calculateSpeed( Point init, Point last) {
@@ -98,7 +91,7 @@ public class Main
             double b = init.getY() - last.getY();
 
             // Get the "Angle of Attack" of the line drawn through arctan
-            direction = (int) Math.toDegrees( Math.atan( a/b));
+            direction = (int) Math.toDegrees( Math.atan( b/a));
     
             return direction;
         }
