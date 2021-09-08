@@ -64,4 +64,8 @@ public class GamePanel extends JPanel implements ActionListener
         timer.stop();
         repaint();
     }
+
+    public GolfBall getGolfBall() {
+        return golfBall;
+    }
 }

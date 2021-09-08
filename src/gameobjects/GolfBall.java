@@ -3,7 +3,6 @@ package gameobjects;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
@@ -62,5 +61,33 @@ public class GolfBall extends JComponent
         // Golf Ball
         graphics2D.setColor( COLOR);
         graphics2D.fillOval( x, y, SIZE, SIZE);
+    }
+
+    public void move( int newX, int newY) {
+        if ( !setX( newX) ) {
+            System.out.println( "ERROR: New x-coordinate value for the Golf Ball is either too large or too small.");
+        }
+
+        if ( !setY( newY) ) {
+            System.out.println( "ERROR: New y-coordinate value for the Golf Ball is either too large or too small.");
+        }
+    }
+
+    private boolean setX( int newX) {
+        if ( newX >= 0 && newX <= PROG_WIDTH ) {
+            x = newX;
+            return true;
+        }
+        
+        return false;
+    }
+
+    private boolean setY( int newY) {
+        if ( newY >= 0 && newY <= PROG_WIDTH ) {
+            y = newY;
+            return true;
+        }
+        
+        return false;
     }
 }

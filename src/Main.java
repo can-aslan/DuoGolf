@@ -25,7 +25,7 @@ public class Main
         // Variables
         JFrame frame = new JFrame();
         GamePanel panel = new GamePanel( WIDTH, HEIGHT);
-        CustomMouseListener listener = new CustomMouseListener();
+        CustomMouseListener listener;
         
         // Program Code
         // Game Panel
@@ -40,6 +40,7 @@ public class Main
         frame.pack();
         frame.setVisible(true);
 
+        listener = new CustomMouseListener( panel);
         panel.addMouseListener( listener);
     }
 
@@ -47,9 +48,10 @@ public class Main
 
         private Point initialDragPoint;
         private Point lastDragPoint;
-    
-        private CustomMouseListener() {
-            System.out.println( "CustomMouseListener initialized.");
+        private GamePanel panel;
+
+        private CustomMouseListener( GamePanel panel) {
+            this.panel = panel;
         }
     
         @Override
@@ -72,6 +74,8 @@ public class Main
 
             System.out.println( "Speed: " + calculateSpeed( initialDragPoint, lastDragPoint));
             System.out.println( "Direction: " + calculateDirection( initialDragPoint, lastDragPoint));
+
+            // panel.getGolfBall().move( 120, 120);
         }
     
         private int calculateSpeed( Point init, Point last) {
