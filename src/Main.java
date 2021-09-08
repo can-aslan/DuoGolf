@@ -2,6 +2,10 @@ import javax.swing.JFrame;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
+import java.awt.Point;
+import java.awt.MouseInfo;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Main class for DuoGolf
@@ -21,6 +25,7 @@ public class Main
         // Variables
         JFrame frame = new JFrame();
         GamePanel panel = new GamePanel( WIDTH, HEIGHT);
+        CustomMouseListener listener = new CustomMouseListener();
         
         // Program Code
         // Game Panel
@@ -34,5 +39,68 @@ public class Main
         
         frame.pack();
         frame.setVisible(true);
+
+        panel.addMouseListener( listener);
+    }
+
+    private static class CustomMouseListener implements MouseListener {
+
+        private Point initialDragPoint;
+        private Point lastDragPoint;
+    
+        private CustomMouseListener() {
+            System.out.println( "CustomMouseListener initialized.");
+        }
+    
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            System.out.println( "clicked");
+        }
+    
+        @Override
+        public void mousePressed(MouseEvent e) {
+            System.out.println( "pressed");
+            initialDragPoint = MouseInfo.getPointerInfo().getLocation();
+        }
+    
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            System.out.println( "released");
+            lastDragPoint = MouseInfo.getPointerInfo().getLocation();
+            System.out.println( "Speed: " + calculateSpeed( initialDragPoint, lastDragPoint));
+            System.out.println( "Direction: " + calculateDirection( initialDragPoint, lastDragPoint));
+        }
+    
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            System.out.println( "entered");
+        }
+    
+        @Override
+        public void mouseExited(MouseEvent e) {
+            System.out.println( "exited");
+        }
+    
+        private int calculateSpeed( Point init, Point last) {
+            int newSpeed = 0;
+            double a = Math.abs( init.getX() - last.getX());
+            double b = Math.abs( init.getY() - last.getY());
+
+            // Calculate the distance between the initial and the last point using Pythagorean Theorem (a^2 + b^2 = c^2)
+            newSpeed = (int) Math.sqrt( Math.pow( a, 2) + Math.pow( b, 2));
+    
+            return newSpeed;
+        }
+
+        private int calculateDirection( Point init, Point last) {
+            int direction = 0;
+            double a = init.getX() - last.getX();
+            double b = init.getY() - last.getY();
+
+            // Get the "Angle of Attack" of the line drawn through arctan
+            direction = (int) Math.toDegrees( Math.atan( a/b));
+    
+            return direction;
+        }
     }
 }
