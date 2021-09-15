@@ -88,6 +88,11 @@ public class GolfBall extends JComponent
         graphics2D.drawRect(0, 0, PROG_WIDTH, PROG_HEIGHT);
     }
 
+    /**
+        Moves the Golf Ball to the given coordinates.
+        @param newX new x-coordinate
+        @param newY new y-coordinate
+    */
     public void move( int newX, int newY) {
         if ( !setX( newX) ) {
             System.out.println( "ERROR: New x-coordinate value for the Golf Ball is either too large or too small.");
