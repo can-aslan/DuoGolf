@@ -11,10 +11,10 @@ import java.time.Instant;
 public class FPS {
 
     // Properties
-    private Instant initialTime = Instant.now();
-    private Duration fpsDeltaTime = Duration.ZERO;
-    private Duration lastTime = Duration.ZERO;
-    private double deltaTime = fpsDeltaTime.toMillis() - lastTime.toMillis();
+    private static Instant initialTime = Instant.now();
+    private static Duration fpsDeltaTime = Duration.ZERO;
+    private static Duration lastTime = Duration.ZERO;
+    private static double deltaTime = fpsDeltaTime.toMillis() - lastTime.toMillis();
 
 
     // Constructors
@@ -26,7 +26,7 @@ public class FPS {
     /**
         Calculates the initial time
     */
-    public void calculateInitialTime() {
+    public static void calculateInitialTime() {
         initialTime = Instant.now();
         fpsDeltaTime = Duration.ZERO;
     }
@@ -34,7 +34,7 @@ public class FPS {
     /**
         Calculates the time difference between the last frame and the current frame
     */
-    public void calculateDeltaTime() {
+    public static void calculateDeltaTime() {
         fpsDeltaTime = Duration.between(initialTime, Instant.now());
         deltaTime = (double) fpsDeltaTime.toMillis() - lastTime.toMillis();
         lastTime = fpsDeltaTime;
@@ -43,14 +43,23 @@ public class FPS {
     /**
         @return Delta Time (the time difference between the last frame and the current frame) in seconds
     */
-    public double getDeltaTimeSeconds() {
+    public static double getDeltaTimeSeconds() {
         return deltaTime / 1000;
     }
 
     /**
         @return Delta Time (the time difference between the last frame and the current frame) in milliseconds
     */
-    public double getDeltaTimeMillis() {
+    public static double getDeltaTimeMillis() {
         return deltaTime;
+    }
+
+    /**
+        @return Frames Per Second
+    */
+    public static double getFPS() {
+        double fps = 1 / getDeltaTimeSeconds();
+
+        return fps;
     }
 }

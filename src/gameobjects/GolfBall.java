@@ -7,6 +7,8 @@ import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
 
+import gamecontrollers.*;
+
 /**
  * Hole Class
  * @author Yağız Can Aslan
@@ -34,6 +36,8 @@ public class GolfBall extends JComponent
     
     // Constructors
     public GolfBall( int width, int height, Hole hole) {
+        FPS.calculateInitialTime();
+
         speed = 0;
 
         PROG_WIDTH = width;
@@ -62,6 +66,8 @@ public class GolfBall extends JComponent
         move( x + velocityX, y + velocityY);
 
         /*
+        // NOTE: (int) Math.round( velocityX * FPS.getDeltaTimeSeconds())
+
         if ( speed > 0 ) {
             speed = speed - FRICTION;
         }
@@ -86,6 +92,9 @@ public class GolfBall extends JComponent
 
         // TEMPORARY Bounce Border
         graphics2D.drawRect(0, 0, PROG_WIDTH, PROG_HEIGHT);
+
+        FPS.calculateDeltaTime();
+        System.out.println( "FPS: " + Math.round( FPS.getFPS()) );
     }
 
     /**
